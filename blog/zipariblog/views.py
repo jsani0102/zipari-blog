@@ -5,6 +5,10 @@ from django.utils import timezone
 
 from .models import Post
 
+# for REST API
+from rest_framework import viewsets
+from .serializers import PostSerializer
+
 def index(request):
 	latest_posts = Post.objects.order_by('-created_at')
 
@@ -46,3 +50,9 @@ def submit_edit(request, post_id):
 	post.save()
 
 	return HttpResponseRedirect(reverse('zipariblog:index'))
+
+# REST API
+class PostViewSet(viewsets.ModelViewSet):
+	# API endpoint to view all posts
+	queryset = Post.objects.all().order_by('-created_at')
+	serializer_class = PostSerializer
