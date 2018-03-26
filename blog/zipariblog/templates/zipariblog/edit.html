@@ -1,0 +1,15 @@
+<form action="{% url 'zipariblog:submit_edit' post.id %}" method="post">
+{% csrf_token %}
+<div>
+	<h1>Title</h1>
+	<input type="text" name="title" value="{{ post.title }}" required />
+</div>
+
+<div>
+	<h2>Content</h2>
+	<textarea name="content" cols="50" rows="20" required>{{ post.content }}</textarea>
+</div>
+
+<input type="submit" value="Submit Edits" />
+
+</form>
